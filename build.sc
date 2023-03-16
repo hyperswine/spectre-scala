@@ -2,8 +2,10 @@ import mill._
 import mill.define.Sources
 import mill.modules.Util
 import mill.scalalib.TestModule.ScalaTest
+import mill.scalalib.TestModule.Utest
 import scalalib._
 import mill.bsp._
+import mill.scalalib.scalafmt.ScalafmtModule
 
 object spectre extends ScalaModule with ScalafmtModule { m =>
   override def millSourcePath = os.pwd
@@ -23,6 +25,7 @@ object spectre extends ScalaModule with ScalafmtModule { m =>
   )
   object test extends Tests with ScalaTest {
     override def ivyDeps = m.ivyDeps() ++ Agg(
+      ivy"com.lihaoyi::utest:0.7.10",
       ivy"edu.berkeley.cs::chiseltest:0.5.4"
     )
   }

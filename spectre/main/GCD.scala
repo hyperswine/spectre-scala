@@ -1,6 +1,3 @@
-package main.scala
-package gcd
-
 import chisel3._
 
 class GCD extends Module {
