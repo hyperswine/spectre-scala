@@ -16,7 +16,7 @@ class VectorUnitIO(val dataWidth: Int, val vecSize: Int) extends Bundle {
   val dataType = Input(UInt(3.W))
   val src1     = Input(UInt(vecSize.W))
   val src2     = Input(UInt(vecSize.W))
-  val src3     = Inp`ut(UInt(vecSize.W))
+  val src3     = Input(UInt(vecSize.W))
   val result   = Output(UInt(vecSize.W))
 }
 
