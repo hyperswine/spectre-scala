@@ -34,7 +34,7 @@ object HardwareSpec extends ChiselUtestTester {
         }
 
         // Example: Add two 8-bit integers
-        testOperation(0.U, 0.U, 1, 2, 0, 3)
+        testOperation(0.U, 8.U, 1, 2, 0, 3)
       }
     }
   }

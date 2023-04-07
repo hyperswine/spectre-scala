@@ -1,6 +1,28 @@
 import chisel3._
 import chisel3.util._
 
+// implicit class LoopOps(val i: Int) extends AnyVal {
+//   def ..(j: Int) = (i, j)
+//   def loop(func: Int => Unit) = {
+//     val (start, end) = i
+//     def loopRec(start: Int, end: Int)(func: Int => Unit): Unit = {
+//       if (start <= end) {
+//         func(start)
+//         loopRec(start + 1, end)(func)
+//       }
+//     }
+//     loopRec(start, end)(func)
+//   }
+// }
+
+def loop(start: Int, end: Int)(func: Int => Unit): Unit = {
+  if (start <= end) {
+    func(start)
+    loop(start + 1, end)(func)
+  }
+}
+
+
 class Hardware extends Module {
   val io = IO(new Bundle {
     val mem_input  = Input(UInt(16.W))
