@@ -138,6 +138,7 @@ class ContentAddressableMemory(val dataWidth: Int, val numEntries: Int) extends 
     val searchHitAddr = Output(UInt(log2Ceil(numEntries).W))
   })
 
+  // "register", array, 1D lookup
   val mem = RegInit(VecInit(Seq.fill(numEntries)(0.U(dataWidth.W))))
 
   // Read data from memory
