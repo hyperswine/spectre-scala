@@ -18,7 +18,6 @@ class AND_Gate extends Component {
 
 object AND_Gate {
   // Let's go
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit =
     SpinalVhdl(new AND_Gate)
-  }
 }
