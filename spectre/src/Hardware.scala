@@ -15,12 +15,12 @@ import chisel3.util._
 //   }
 // }
 
-def loop(start: Int, end: Int)(func: Int => Unit): Unit = {
-  if (start <= end) {
-    func(start)
-    loop(start + 1, end)(func)
-  }
-}
+// def loop(start: Int, end: Int)(func: Int => Unit): Unit = {
+//   if (start <= end) {
+//     func(start)
+//     loop(start + 1, end)(func)
+//   }
+// }
 
 
 class Hardware extends Module {
