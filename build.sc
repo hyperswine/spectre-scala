@@ -11,16 +11,15 @@ object spectre extends ScalaModule with ScalafmtModule { m =>
     "-deprecation",
     "-feature",
     "-Xcheckinit",
-    "-P:chiselplugin:genBundleElements"
   )
   override def ivyDeps = Agg(
-    ivy"edu.berkeley.cs::chisel3:3.5.4",
-    ivy"com.sifive::chisel-circt:0.6.0",
+    ivy"edu.berkeley.cs::chisel3:3.6.0",
+    // ivy"com.sifive::chisel-circt:0.6.0",
     ivy"com.github.spinalhdl::spinalhdl-core:1.6.4",
     ivy"com.github.spinalhdl::spinalhdl-lib:1.6.4"
   )
   override def scalacPluginIvyDeps = Agg(
-    ivy"edu.berkeley.cs:::chisel3-plugin:3.5.4",
+    ivy"edu.berkeley.cs:::chisel3-plugin:3.6.0",
     ivy"com.github.spinalhdl::spinalhdl-idsl-plugin:1.6.4"
   )
   object test extends Tests with Utest {

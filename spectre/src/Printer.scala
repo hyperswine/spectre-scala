@@ -13,6 +13,6 @@ class Printer extends Module {
 }
 
 object VerilogMain extends App {
-//   ChiselStage.emitSystemVerilog(new Printer)
+  ChiselStage.emitSystemVerilog(new Printer)
   ChiselStage.emitCHIRRTL(new Printer)
 }
