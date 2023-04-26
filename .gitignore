@@ -8,3 +8,4 @@ out
 .bsp
 test_run_dir
 *.vhd
+Printer.anno.json
