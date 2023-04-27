@@ -4,15 +4,15 @@
 
 // slicer though... maybe a default "just works" set, and some other software on top of that to detect if its just not going to work
 
-import chisel3._
-import circt.stage.ChiselStage
+import spinal.core._
 
-class Printer extends Module {
-  val io = IO(new Bundle {})
-  printf("hello world\n")
-}
+// define a minimal working interface, like wifi?
 
-object VerilogMain extends App {
-  ChiselStage.emitSystemVerilog(new Printer)
-  ChiselStage.emitCHIRRTL(new Printer)
+class Printer extends Component {
+  val io = new Bundle {
+    val b = in.Bool()
+    val c = out.Bool()
+  }
+
+  io.c := io.b
 }

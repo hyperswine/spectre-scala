@@ -16,8 +16,8 @@ class AND_Gate extends Component {
   io.c := io.a & io.b
 }
 
-// object AND_Gate {
-//   // Let's go
-//   def main(args: Array[String]): Unit =
-//     SpinalVhdl(new AND_Gate)
-// }
+object AND_Gate {
+  // Let's go
+  def main(args: Array[String]): Unit =
+    SpinalVhdl(new AND_Gate)
+}
