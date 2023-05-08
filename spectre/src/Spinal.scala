@@ -30,6 +30,22 @@ class Playground extends Component {
 
   // Here we define some asynchronous logic
   io.c := io.a & io.b
+
+  // so like read or something...
+  // do stuff like you know that algorithm??
+  // wait that algo is useless
+
+  // just add and vectors
+
+  // do I want graph reduction?
+  // do I want to try out dataflow? like that graph reduction one which kinda used it
+
+  // https://spinalhdl.github.io/SpinalDoc-RTD/master/SpinalHDL/Sequential%20logic/memory.html#mixed-width-ram
+  
+}
+
+class Dataflow extends Component {
+
 }
 
 object Playground {
