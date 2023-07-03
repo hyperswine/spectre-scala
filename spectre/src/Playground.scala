@@ -1,6 +1,6 @@
 import spinal.core._
 
-class Playground extends Component {
+class Processor extends Component {
   val io = new Bundle {
     val a          = in.Bool()
     val b          = in.Bool()
@@ -45,21 +45,8 @@ class Playground extends Component {
 }
 
 object VectorInstruction extends SpinalEnum {
-  val add, sub = newElement()
+  val add, sub, mult, div = newElement()
 }
-
-// elementwise or array - scalar
-/*
-  1. v1 + v2
-  [1, 2, 3] + [2, 3, 4]
-
-  2. v1 + s
-  [1, 2, 3] + 3
-  [1, 2, 3] + [3, 3, 3]
-
-  3. v1 ** v2
-  [1, 2, 3] ** [2, 3, 4]
-*/
 
 class VectorProc(lanes: Int, width: Int) extends Component {
   val io = new Bundle {
@@ -77,6 +64,7 @@ class VectorProc(lanes: Int, width: Int) extends Component {
 object Playground {
   // Let's go
   def main(args: Array[String]): Unit =
+    println("Hi Verilog")
     // SpinalVhdl(new Playground)
-    SpinalVerilog(new VectorProc(2, 16))
+    // SpinalVerilog(new VectorProc(2, 16))
 }
