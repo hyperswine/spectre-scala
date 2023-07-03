@@ -52,20 +52,20 @@ object VectorInstruction extends SpinalEnum {
 
 // val reg = Reg(UInt((lanes * width) bits))
 
-// no width for now
-class VectorProcessor(lanes: Int, width: Int) extends Component {
+// no width for now , width: Int
+class VectorProcessor(lanes: Int, int_size: Int) extends Component {
   val io = new Bundle {
-    val src1        = in.Vec[UInt](lanes)
-    val src2        = in.Vec[UInt](lanes)
+    val src1        = in.Vec(UInt(int_size bits), lanes)
+    val src2        = in.Vec(UInt(int_size bits), lanes)
     val instruction = in(VectorInstruction)
-    val output      = out.Vec[UInt](lanes)
+    val output      = out.Vec(UInt(int_size bits), lanes)
   }
 
   switch(io.instruction) {
     is(VectorInstruction.add) { io.output := Vec(io.src1.zip(io.src2).map({ case (a, b) => a + b })) }
     is(VectorInstruction.sub) { io.output := Vec(io.src1.zip(io.src2).map({ case (a, b) => a - b })) }
-    is(VectorInstruction.mult) { io.output := Vec(io.src1.zip(io.src2).map({ case (a, b) => a * b })) }
-    is(VectorInstruction.div) { io.output := Vec(io.src1.zip(io.src2).map({ case (a, b) => a / b })) }
+    is(VectorInstruction.mult) { io.output := Vec(io.src1.zip(io.src2).map({ case (a, b) => (a * b).resize(int_size) })) }
+    is(VectorInstruction.div) { io.output := Vec(io.src1.zip(io.src2).map({ case (a, b) => (a / b).resize(int_size) })) }
   }
 }
 

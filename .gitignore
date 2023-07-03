@@ -10,3 +10,5 @@ test_run_dir
 *.vhd
 Printer.anno.json
 .DS_Store
+tmp
+simWorkspace
