@@ -3,41 +3,19 @@ import spinal.core._
 
 object VectorProcessorSim extends App {
   SimConfig.withWave.compile(new VectorProcessor(4, 64)).doSim { dut =>
-    // Initialization
-    // dut.io.src1.zipWithIndex.foreach { case (wire, i) => wire #= i }
-    // dut.io.src2.zipWithIndex.foreach { case (wire, i) => wire #= i * 2 }
-
-    // dut.io.src1 := Vec(0, 1, 2, 4)
-    // dut.io.src2 := Vec(0, 1, 2, 4)
-
-    // dut.io.src1 #= Vec(Vector(0, 1, 2, 3).map(U(_, 64 bits)))
-    // dut.io.src2 #= Vec(Vector(0, 1, 2, 3).map(U(_, 64 bits)))
-
     Vector(0, 1, 2, 3).zipWithIndex.foreach {
       case (value, index) =>
         dut.io.src1(index) #= value
         dut.io.src2(index) #= value
     }
 
-    // dut.clockDomain.forkStimulus(period = 10)
-    // dut.clockDomain.waitSampling()
-
     // Simulation for each instruction
-    // for (instruction <- VectorInstruction.elements) {
-    //   dut.io.instruction #= instruction
-    //   println(s"Instruction: $instruction")
-    //   println("Output: " + dut.io.output.toVector.map(_.toBigInt).mkString(", "))
-    // }
-
-    dut.io.instruction #= VectorInstruction.add
-
-    sleep(1)
-
-    val res = dut.io.output
-
-    println("Output: " + res.mkString(", "))
-
-    // sleep(1)
+    for (instruction <- VectorInstruction.elements) {
+      dut.io.instruction #= instruction
+      println(s"Instruction: $instruction")
+      sleep(1)
+      println("Output: " + dut.io.output.toVector.map(_.toBigInt).mkString(", "))
+    }
   }
 }
 
