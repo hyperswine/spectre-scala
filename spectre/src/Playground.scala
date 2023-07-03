@@ -28,6 +28,8 @@ class Processor extends Component {
     address = io.readAddress
   )
 
+  // do the operation on a and b and output to c
+
   // Here we define some asynchronous logic
   io.c := io.a & io.b
 
@@ -48,23 +50,48 @@ object VectorInstruction extends SpinalEnum {
   val add, sub, mult, div = newElement()
 }
 
-class VectorProc(lanes: Int, width: Int) extends Component {
+// val reg = Reg(UInt((lanes * width) bits))
+
+// no width for now
+class VectorProcessor(lanes: Int, width: Int) extends Component {
   val io = new Bundle {
-    val a = in.Vec[UInt](lanes * width)
-    val b = in.Vec[UInt](lanes * width)
-    val instruction = in.Bits()
-    val output = out.Vec[UInt](lanes * width)
+    val src1        = in.Vec[UInt](lanes)
+    val src2        = in.Vec[UInt](lanes)
+    val instruction = in(VectorInstruction)
+    val output      = out.Vec[UInt](lanes)
   }
 
-  val reg = Reg(UInt((lanes * width) bits))
+  switch(io.instruction) {
+    is(VectorInstruction.add) { io.output := Vec(io.src1.zip(io.src2).map({ case (a, b) => a + b })) }
+    is(VectorInstruction.sub) { io.output := Vec(io.src1.zip(io.src2).map({ case (a, b) => a - b })) }
+    is(VectorInstruction.mult) { io.output := Vec(io.src1.zip(io.src2).map({ case (a, b) => a * b })) }
+    is(VectorInstruction.div) { io.output := Vec(io.src1.zip(io.src2).map({ case (a, b) => a / b })) }
+  }
+}
 
-  io.output(0) := 0
+class Memory(size: Int) extends Component {
+  val io = new Bundle {
+    val addr        = in.UInt(log2Up(size) bits)
+    val writeEnable = in.Bool()
+    val writeData   = in.Bits(32 bits)
+    val readData    = out.Bits(32 bits)
+  }
+
+  val mem = Mem(Bits(32 bits), size)
+
+  mem.write(
+    enable  = io.writeEnable,
+    address = io.addr,
+    data    = io.writeData
+  )
+
+  io.readData := mem.readSync(io.addr)
 }
 
 object Playground {
   // Let's go
   def main(args: Array[String]): Unit =
     println("Hi Verilog")
-    // SpinalVhdl(new Playground)
-    // SpinalVerilog(new VectorProc(2, 16))
+  // SpinalVhdl(new Playground)
+  // SpinalVerilog(new VectorProc(2, 16))
 }
